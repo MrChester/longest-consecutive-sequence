@@ -8,51 +8,19 @@ module.exports = function longestConsecutiveLength(array) {
         return 1;
     }
 
-
-    // for (let i = 0; i < arrLen - 1; i++) {
-    //     if (array[i] <= array[i + 1]) {
-    //         sortArrFlag = true;
-    //     } else {
-    //         sortArrFlag = false;
-    //         break;
-    //     }
-    // }
-
     var sortedArr = mergeSort(array);
-    // if (!sortArrFlag) {
-    //     sortedArr = mergeSort(array);
-    // } else {
-    //     sortedArr = array;
-    // }
+    var sortedArrLen = sortedArr.length;
+    var count = 1;
 
-    var consecutiveLengthArr = [],
-        sortedArrLen = sortedArr.length,
-        flag = false,
-        count = 1;
-
+    var maxLen = 0;
     for (let i = 0; i < sortedArrLen - 1; i++) {
-        if (sortedArr[i + 1] - sortedArr[i] === 1 || sortedArr[i] === sortedArr[i + 1]) {
+        if (sortedArr[i + 1] - sortedArr[i] === 1 || sortedArr[i] === sortedArr[i + 1] || i === sortedArrLen - 1) {
             count++;
-            flag = true;
-            if (i === (sortedArrLen - 1)) {
-                count += 1;
-            }
         } else {
-            flag = false;
-            consecutiveLengthArr.push(count);
+            if (maxLen < count) {
+                maxLen = count;
+            }
             count = 1;
-        }
-    }
-
-    if (flag) {
-        consecutiveLengthArr.push(count);
-    }
-
-    var maxLen = consecutiveLengthArr[0];
-
-    for (let i = 1; i < consecutiveLengthArr.length; i++) {
-        if (maxLen < consecutiveLengthArr[i]) {
-            maxLen = consecutiveLengthArr[i];
         }
     }
 
