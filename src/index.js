@@ -8,7 +8,26 @@ module.exports = function longestConsecutiveLength(array) {
         return 1;
     }
 
-    var sortedArr = mergeSort(array);
+    var sortArrFlag = false;
+
+    for (let i = 0; i < arrLen - 1; i++) {
+        if (array[i] <= array[i + 1]) {
+            sortArrFlag = true;
+            // console.log('true');
+        } else {
+            sortArrFlag = false;
+            // console.log('break');
+            break;
+        }
+    }
+
+    if (!sortArrFlag) {
+        sortedArr = mergeSort(array);
+    } else {
+        sortedArr = array;
+    }
+
+    // var sortedArr = mergeSort(array);
     var sortedArrLen = sortedArr.length;
     var count = 1;
 
