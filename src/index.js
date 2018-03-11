@@ -1,37 +1,38 @@
 module.exports = function longestConsecutiveLength(array) {
+    // Common variables
     const mergeSort = require('./mergeSort');
     var arrLen = array.length;
 
+    // Checking of an array - if empty or has one elem within itself.
     if (arrLen === 0) {
         return 0;
     } else if (arrLen === 1) {
         return 1;
     }
 
-    var sortArrFlag = false;
-
+    // Checking of an array - sorted or not. If not - call mergeSort() function.
+    var isSorted = false;
     for (let i = 0; i < arrLen - 1; i++) {
         if (array[i] <= array[i + 1]) {
-            sortArrFlag = true;
-            // console.log('true');
+            isSorted = true;
         } else {
-            sortArrFlag = false;
-            // console.log('break');
+            isSorted = false;
             break;
         }
     }
 
-    if (!sortArrFlag) {
+    if (!isSorted) {
         sortedArr = mergeSort(array);
     } else {
         sortedArr = array;
     }
 
-    // var sortedArr = mergeSort(array);
-    var sortedArrLen = sortedArr.length;
-    var count = 1;
 
-    var maxLen = 0;
+    // Finding msx consecutive sequence.
+    var sortedArrLen = sortedArr.length,
+        count = 1,
+        maxLen = 0;
+
     for (let i = 0; i < sortedArrLen - 1; i++) {
         if (sortedArr[i + 1] - sortedArr[i] === 1 || sortedArr[i] === sortedArr[i + 1] || i === sortedArrLen - 1) {
             count++;
@@ -43,5 +44,6 @@ module.exports = function longestConsecutiveLength(array) {
         }
     }
 
+    // Function return statement.
     return maxLen;
 }
