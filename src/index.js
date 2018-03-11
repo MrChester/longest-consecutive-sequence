@@ -21,6 +21,7 @@ module.exports = function longestConsecutiveLength(array) {
         }
     }
 
+    var sortedArr = [];
     if (!isSorted) {
         sortedArr = mergeSort(array);
     } else {
@@ -73,6 +74,8 @@ module.exports = function longestConsecutiveLength(array) {
     for (let i = 0; i < sortedArrLen - 1; i++) {
         if (sortedArr[i + 1] - sortedArr[i] === 1) {
             count++;
+        } else if (sortedArr[i] === sortedArr[i + 1]) {
+            count += 0;
         } else {
             count = 1;
         }
